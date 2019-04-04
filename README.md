@@ -1,3 +1,32 @@
+# How to use the app
+
+Just moving the phone when in the main menu will make the ball move.
+You will get a message when the ball has begun to move, and once it has landed, you will get to know how far it went.
+Once it has landed, you can move the phone again to throw the ball yet again.
+You will know how hard you threw the ball while the ball is in the air, but it will vanish once the ball has landed.
+
+# Some faults that might happen
+
+The sound will continue to play even after the ball has landed, if the throw was weak enough for it to land before the sound stopped.
+You will not be able to see how far the ball went if you throw it again, so be careful and read how far it went if you want to know.
+
+# How to build the app
+
+Don't really know how to explain it, but to use the debug way when testing. Yes, I am that lazy.
+
+# Features that are working
+
+Pretty much all of them should work. It has all been tested on a Samsung Galaxy S8 with android version 9.
+
+#Features that do not work
+
+Dunno, some things might not work on some phones.
+Updates are depenent on the movement of the phone, so it will likely not work on emulators (It worked just fine on my phone, as it constantly was changing for some reason)
+
+#How the code is organized
+
+I just try to make it work. And at times how I do it will vary. Would have liked to have the sensor stuff in it's own class, but I couldn't figure out how to constantly check it.
+
 # Lab 03: Throwing a virtual ball upwords 
 
 ## The idea
@@ -33,15 +62,15 @@ You can provide haptic feedback to the hand holding the phone, when the ball lea
 
 # Checklist
 
-* [2] The git repository URL is correctly provided, such that command works: `git clone <url> `
-* [ ] The code is well, logically organised and structured into appropriate classes. Everything should be in a single package.
+* [x] The git repository URL is correctly provided, such that command works: `git clone <url> `
+* [x] The code is well, logically organised and structured into appropriate classes. Everything should be in a single package.
 * [ ] The app has been user tested with someone other than the author.
-* [ ] The user can go to Preferences and set the MIN_ACC value (sensitivity).
-* [ ] The app plays sounds on the ball highest point.
-* [ ] The app records the highest point reached by the ball.
+* [x] The user can go to Preferences and set the MIN_ACC value (sensitivity).
+* [x] The app plays sounds on the ball highest point.
+* [x] The app records the highest point reached by the ball.
 * [ ] Share your sensitivity constant as well as the size of the sliding window with others.
-* [ ] The repo is *public*, such that reviewers can access it and review it.
-* [ ] The repo has a README.md file, explaining how to build the app, how to use the app, which features are working, which are not working, how the code is organised, and what extras does the project have.
+* [x] The repo is *public*, such that reviewers can access it and review it.
+* [x] The repo has a README.md file, explaining how to build the app, how to use the app, which features are working, which are not working, how the code is organised, and what extras does the project have.
 
 
 ## Hints
