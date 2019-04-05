@@ -16,14 +16,15 @@ Don't really know how to explain it, but to use the debug way when testing. Yes,
 
 # Features that are working
 
-Pretty much all of them should work. It has all been tested on a Samsung Galaxy S8 with android version 9.
+Pretty much all of them should work. It has all been tested on a Samsung Galaxy S8 with android version 9 with API 28.
+Minimum API is 18.
 
-#Features that do not work
+# Features that do not work
 
 Dunno, some things might not work on some phones.
 Updates are depenent on the movement of the phone, so it will likely not work on emulators (It worked just fine on my phone, as it constantly was changing for some reason)
 
-#How the code is organized
+# How the code is organized
 
 I just try to make it work. And at times how I do it will vary. Would have liked to have the sensor stuff in it's own class, but I couldn't figure out how to constantly check it.
 
