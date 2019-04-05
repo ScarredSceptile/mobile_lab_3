@@ -15,17 +15,11 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
-    private float ACC = 0.0f;
-    private float throwMax = 0.0f;
-    private long throwStart;
-    private boolean throwStarted = false;
 
     private static Throw thrower;
     private static TextView height;
-    private static TextView msg;
     private static MediaPlayer player;
 
-    final public static float EarthGravity = -9.81f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         player = MediaPlayer.create(MainActivity.this, R.raw.ping);
         height = findViewById(R.id.height);
-        msg = findViewById(R.id.throwStarted);
         final Button settings = findViewById(R.id.btn_settings);
         thrower = new Throw();
 
@@ -51,11 +44,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         });
     }
 
-    public static void updateText(float h) {
+    public static void updateTextThrowStart(float speed) {
+        //Tell the user that the throw has started, and how fast they threw so they know about how long they need to wait for it to come back
+        height.setText("The throw has started with a speed of " + Float.toString(speed) + "m/s");
+    }
+
+    public static void updateTextThrowEnd(float h, float speed) {
         //Give the user a message about how far up the ball reached
-        height.setText("Height reached is: " + Float.toString(h));
-        //Remove the message telling the user that the ball has started flying
-        msg.setText("");
+        height.setText("Height reached is: " + Float.toString(h) + "m\nSpeed was: " + Float.toString(speed) + "m/s");
     }
 
     public static void playSound() {
@@ -71,51 +67,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 Throw.continueThrow(event.timestamp);
             //Else check if a new throw can be started/continue the start
             else
-                updateACC(event);
-        }
-    }
-
-    private void updateACC(SensorEvent event) {
-        //Calculate the acceleration of the ball    /Lying flat, it will be about 0.2
-        ACC = (float) Math.sqrt(Math.pow(event.values[0], 2) + Math.pow(event.values[1], 2) + Math.pow(event.values[2], 2)) + EarthGravity;
-
-        //If no throw has been started, and the acceleration is greater than the minimum
-        if (!throwStarted && ACC > SettingsActivity.minACC) {
-            //Start the throw-data gathering
-            throwStarted = true;
-            //Get the time of when the data-gathering starts
-            throwStart = event.timestamp;
-
-            //Remove the previous height
-            height.setText("");
-
-            throwMax = ACC;     //If it is the only reading to go above the lowest ACC accepted
-        }
-
-        //If the data-gathering time is not over, check if a new max speed is reached
-        else if (throwStarted && event.timestamp - throwStart < 500000000) {
-            if (ACC > SettingsActivity.minACC) {
-                if (ACC > throwMax) {
-                    throwMax = ACC;
-                }
-            }
-        }
-
-        //Once enough time for the throw to be registered has passed, begin the throw
-        else if (throwStarted && event.timestamp - throwStart >= 500000000) {
-
-            //Start the throw
-            thrower.startThrow(event.timestamp, throwMax);
-
-            //Message so that the user knows when the throw has started
-            //And what speed the ball is going at
-            msg.setText("The throw has started\nThe speed is: " + Float.toString(throwMax));
-
-            //reset values
-            throwStarted = false;
-            throwMax = 0.0f;
-
-
+                thrower.updateACC(event);
         }
     }
 
